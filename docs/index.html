@@ -327,11 +327,13 @@ footer.foot { margin-top: 48px; color: var(--muted); font-size: .8rem; max-width
   --m-sky: #DCEBEF; --m-sky-2: #EAF3F2;
   --m-water: #A6D3E0; --m-wave: rgb(255 255 255 / .6);
   --m-grass: #C9E2B1; --m-block: #BCD9A1; --m-side1: #9DBF86; --m-side2: #86AC70; --m-soil: #B39572;
-  --m-road: #E4E0D5; --m-road-line: #FFFFFF;
+  --m-road: #C9C7C1; --m-road-line: #FFFFFF;
   --m-tree: #79B162; --m-tree-2: #5F9A4F; --m-trunk: #8B6B4E;
   --m-win: #D3E9F4; --m-win-lit: #FFD27A; --m-win-off: #4A4F55;
   --m-bldg-filter: none; --m-smoke: #6E7378;
   --warn: #D08A12;
+  --m-sand: #EFE2BC; --m-sand-2: #D9C797; --m-shallow: #BDE3EA; --m-walk: #F1EEE6; --m-pond: #8FCBE2; --m-path: #E6DCC0;
+  --m-zebra: #FFFFFF; --m-cloud: #FFFFFF; --m-cloud-o: .5; --m-lamp: #F7E3A1; --m-shadow-o: .13;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -342,6 +344,8 @@ footer.foot { margin-top: 48px; color: var(--muted); font-size: .8rem; max-width
     --m-tree: #3F6E46; --m-tree-2: #325A39; --m-trunk: #5A4636;
     --m-win: #3B4F62; --m-win-lit: #FFC861; --m-win-off: #1E2226;
     --m-bldg-filter: brightness(.74) saturate(.85); --m-smoke: #A3A9AE; --warn: #F2B84B;
+    --m-sand: #5B5540; --m-sand-2: #474230; --m-shallow: #23445A; --m-walk: #4A5258; --m-pond: #2A5570; --m-path: #56513F;
+    --m-zebra: #7C858B; --m-cloud: #9FB2C4; --m-cloud-o: .16; --m-lamp: #FFD166; --m-shadow-o: .3;
   }
 }
 :root[data-theme="dark"] {
@@ -352,6 +356,8 @@ footer.foot { margin-top: 48px; color: var(--muted); font-size: .8rem; max-width
   --m-tree: #3F6E46; --m-tree-2: #325A39; --m-trunk: #5A4636;
   --m-win: #3B4F62; --m-win-lit: #FFC861; --m-win-off: #1E2226;
   --m-bldg-filter: brightness(.74) saturate(.85); --m-smoke: #A3A9AE; --warn: #F2B84B;
+    --m-sand: #5B5540; --m-sand-2: #474230; --m-shallow: #23445A; --m-walk: #4A5258; --m-pond: #2A5570; --m-path: #56513F;
+    --m-zebra: #7C858B; --m-cloud: #9FB2C4; --m-cloud-o: .16; --m-lamp: #FFD166; --m-shadow-o: .3;
 }
 
 .stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
@@ -381,7 +387,7 @@ footer.foot { margin-top: 48px; color: var(--muted); font-size: .8rem; max-width
 }
 .map-tip.on { opacity: 1; }
 .map-tip small { font-weight: 500; opacity: .75; margin-left: 6px; }
-.bldg { cursor: help; }
+.bldg { cursor: default; }
 .map-caption .st { font-family: var(--f-mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
 .map-caption .st.safe { background: var(--real-soft); color: var(--real); }
 .map-caption .st.hit { background: var(--fake-soft); color: var(--fake); }
@@ -394,6 +400,20 @@ footer.foot { margin-top: 48px; color: var(--muted); font-size: .8rem; max-width
 .m-side1 { fill: var(--m-side1); } .m-side2 { fill: var(--m-side2); } .m-soil { fill: var(--m-soil); }
 .m-road { fill: var(--m-road); }
 .m-road-line { stroke: var(--m-road-line); stroke-width: 1.4; stroke-dasharray: 7 7; fill: none; }
+.m-sand { fill: var(--m-sand); stroke: var(--m-sand); stroke-width: 26; stroke-linejoin: round; }
+.m-sand-2 { fill: var(--m-sand-2); stroke: var(--m-sand-2); stroke-width: 26; stroke-linejoin: round; }
+.m-shallow { fill: var(--m-shallow); stroke: var(--m-shallow); stroke-width: 74; stroke-linejoin: round; opacity: .75; }
+.m-land { stroke: var(--m-grass); stroke-width: 6; stroke-linejoin: round; }
+ellipse.m-sand { stroke: none; }
+.m-walk { fill: var(--m-walk); } .m-pond { fill: var(--m-pond); } .m-zebra { fill: var(--m-zebra); opacity: .9; }
+.m-path { fill: none; stroke: var(--m-path); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.m-jet { fill: none; stroke: #fff; stroke-width: 1.4; stroke-linecap: round; opacity: .8; }
+.m-shadow { fill: #000; opacity: var(--m-shadow-o); }
+.m-lamp { fill: var(--m-lamp); }
+.m-cloud { fill: var(--m-cloud); opacity: var(--m-cloud-o); }
+.sky, .life { pointer-events: none; }
+.boat { animation: bob 4.5s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(2.5px); } }
 .m-tree { fill: var(--m-tree); } .m-tree-2 { fill: var(--m-tree-2); } .m-trunk { fill: var(--m-trunk); }
 
 .bldgs { filter: var(--m-bldg-filter); }
@@ -420,6 +440,25 @@ footer.foot { margin-top: 48px; color: var(--muted); font-size: .8rem; max-width
 .badge path { stroke: #fff; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .blink { animation: blink 1.6s steps(2, jump-none) infinite; }
 @keyframes blink { 50% { opacity: .15; } }
+
+.map-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.map-label {
+  position: absolute; left: 0; top: 0; pointer-events: auto; cursor: pointer; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 4px; border-radius: 999px;
+  font: 600 .74rem/1.2 var(--f-ui); color: var(--ink);
+  background: color-mix(in srgb, var(--surface) 92%, transparent); border: 1px solid var(--line);
+  box-shadow: 0 2px 8px -4px rgb(0 0 0 / .35); transition: border-color .2s, background .2s;
+}
+.map-label:hover { border-color: var(--ink); }
+.map-label .ic { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font: 700 .7rem/1 var(--f-ui-base); color: #fff; background: var(--muted); }
+.map-label .ic::before { content: "•"; }
+.map-label.waiting .ic { background: var(--warn); animation: ping 2.2s ease-out infinite; } .map-label.waiting .ic::before { content: "!"; }
+.map-label.current { border-color: var(--accent); } .map-label.current .ic { background: var(--accent); } .map-label.current .ic::before { content: "?"; }
+.map-label.safe .ic { background: var(--real); } .map-label.safe .ic::before { content: "✓"; }
+.map-label.hit .ic { background: var(--fake); } .map-label.hit .ic::before { content: "✕"; }
+.map-label.idle { padding-left: 10px; } .map-label.idle .ic { display: none; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--warn) 70%, transparent); } 100% { box-shadow: 0 0 0 9px transparent; } }
+.map.compact .map-label { padding: 3px; } .map.compact .map-label .nm { display: none; } .map.compact .map-label.idle { display: none; }
 
 /* Big-map mode: the city takes the whole width while you choose a building */
 .stage[data-mode="map"] { grid-template-columns: minmax(0, 1fr) !important; gap: 14px; }
@@ -508,9 +547,10 @@ footer.foot { margin-top: 48px; color: var(--muted); font-size: .8rem; max-width
   </header>
   <main class="stage">
     <section class="map-pane">
-      <div class="map" id="map"><svg id="city" role="img" preserveAspectRatio="xMidYMid meet"></svg><div class="map-hud" id="map-hud" hidden></div>
+      <div class="map" id="map"><svg id="city" role="img" preserveAspectRatio="xMidYMid meet"></svg><div class="map-labels" id="map-labels"></div>
+        <div class="map-hud" id="map-hud" hidden></div>
         <div class="map-ctl"><button id="z-in">+</button><button id="z-out">−</button><button id="z-all">⤢</button></div>
-        <div class="map-tip" id="map-tip" aria-hidden="true"></div><div class="map-caption" id="map-caption" aria-live="polite"></div></div>
+        <div class="map-caption" id="map-caption" aria-live="polite"></div></div>
     </section>
     <section class="play" id="app" aria-live="polite"></section>
   </main>
@@ -633,24 +673,23 @@ const City = (() => {
     const n = parseInt(hex.slice(1), 16), c = v => Math.round(Math.min(255, v * k)).toString(16).padStart(2, "0");
     return "#" + c(n >> 16 & 255) + c(n >> 8 & 255) + c(n & 255);
   };
-  // A box: front-left face (y+d), front-right face (x+w), roof.
+  // A box: front-left face (y+d), front-right face (x+w), roof with a crisp light edge.
+  const EDGE = 'stroke="#fff" stroke-opacity=".5" stroke-width=".8" stroke-linejoin="round"';
   const box = (x, y, z, w, d, h, c) =>
     poly([pt(x, y + d, z), pt(x + w, y + d, z), pt(x + w, y + d, z + h), pt(x, y + d, z + h)], `fill="${shade(c, .88)}"`) +
     poly([pt(x + w, y, z), pt(x + w, y + d, z), pt(x + w, y + d, z + h), pt(x + w, y, z + h)], `fill="${shade(c, .74)}"`) +
-    poly([pt(x, y, z + h), pt(x + w, y, z + h), pt(x + w, y + d, z + h), pt(x, y + d, z + h)], `fill="${c}"`);
+    poly([pt(x, y, z + h), pt(x + w, y, z + h), pt(x + w, y + d, z + h), pt(x, y + d, z + h)], `fill="${c}" ${EDGE}`);
+  // Flat details on the two visible faces and on a roof.
+  const fL = (x0, x1, y, z0, z1, a) => poly([pt(x0, y + .006, z0), pt(x1, y + .006, z0), pt(x1, y + .006, z1), pt(x0, y + .006, z1)], a);
+  const fR = (y0, y1, x, z0, z1, a) => poly([pt(x + .006, y0, z0), pt(x + .006, y1, z0), pt(x + .006, y1, z1), pt(x + .006, y0, z1)], a);
+  const quadTop = (x0, y0, x1, y1, z, a) => poly([pt(x0, y0, z), pt(x1, y0, z), pt(x1, y1, z), pt(x0, y1, z)], a);
   // Window grid on both visible faces.
   function wins(x, y, z, w, d, h, cl, cr, rows, ww = .5, wh = .45) {
     let s = "";
     for (let j = 0; j < rows; j++) {
       const za = z + h * (j + (1 - wh) / 2) / rows, zb = za + h * wh / rows;
-      for (let i = 0; i < cl; i++) {
-        const a = x + w * (i + (1 - ww) / 2) / cl, b = a + w * ww / cl;
-        s += poly([pt(a, y + d, za), pt(b, y + d, za), pt(b, y + d, zb), pt(a, y + d, zb)], 'class="win"');
-      }
-      for (let i = 0; i < cr; i++) {
-        const a = y + d * (i + (1 - ww) / 2) / cr, b = a + d * ww / cr;
-        s += poly([pt(x + w, a, za), pt(x + w, b, za), pt(x + w, b, zb), pt(x + w, a, zb)], 'class="win"');
-      }
+      for (let i = 0; i < cl; i++) { const a = x + w * (i + (1 - ww) / 2) / cl; s += fL(a, a + w * ww / cl, y + d, za, zb, 'class="win"'); }
+      for (let i = 0; i < cr; i++) { const a = y + d * (i + (1 - ww) / 2) / cr; s += fR(a, a + d * ww / cr, x + w, za, zb, 'class="win"'); }
     }
     return s;
   }
@@ -658,7 +697,7 @@ const City = (() => {
   function gable(x, y, z, w, d, rh, c) {
     const m = y + d / 2;
     return poly([pt(x, y, z), pt(x + w, y, z), pt(x + w, m, z + rh), pt(x, m, z + rh)], `fill="${shade(c, 1.05)}"`) +
-      poly([pt(x, y + d, z), pt(x + w, y + d, z), pt(x + w, m, z + rh), pt(x, m, z + rh)], `fill="${shade(c, .86)}"`) +
+      poly([pt(x, y + d, z), pt(x + w, y + d, z), pt(x + w, m, z + rh), pt(x, m, z + rh)], `fill="${shade(c, .86)}" ${EDGE}`) +
       poly([pt(x + w, y, z), pt(x + w, y + d, z), pt(x + w, m, z + rh)], `fill="${shade(c, .7)}"`);
   }
   function dome(cx, cy, z, r, c) {
@@ -674,115 +713,214 @@ const City = (() => {
       `<circle cx="${f(X)}" cy="${f(Y - 15 * s)}" r="${8 * s}" class="m-tree"/>` +
       `<circle cx="${f(X + 3 * s)}" cy="${f(Y - 12 * s)}" r="${4.5 * s}" class="m-tree-2"/>`;
   }
-  const quadTop = (x0, y0, x1, y1, z, a) => poly([pt(x0, y0, z), pt(x1, y0, z), pt(x1, y1, z), pt(x0, y1, z)], a);
+  function pine(x, y, s = 1) {
+    const [X, Y] = pt(x, y), tri = (b, t, w, cls) => `<path d="M${f(X - w * s)},${f(Y - b * s)} L${f(X)},${f(Y - t * s)} L${f(X + w * s)},${f(Y - b * s)} Z" class="${cls}"/>`;
+    return `<ellipse cx="${f(X)}" cy="${f(Y)}" rx="${6 * s}" ry="${3 * s}" fill="#000" opacity=".12"/>` +
+      `<rect x="${f(X - 1.2 * s)}" y="${f(Y - 6 * s)}" width="${2.4 * s}" height="${6 * s}" class="m-trunk"/>` +
+      tri(4, 16, 7.5, "m-tree-2") + tri(10, 21, 6, "m-tree") + tri(16, 26, 4.5, "m-tree-2");
+  }
+  const bush = (x, y, s = 1) => { const [X, Y] = pt(x, y); return `<ellipse cx="${f(X)}" cy="${f(Y - 2.5 * s)}" rx="${5 * s}" ry="${3.6 * s}" class="m-tree"/><ellipse cx="${f(X + 2 * s)}" cy="${f(Y - 1.6 * s)}" rx="${3 * s}" ry="${2.4 * s}" class="m-tree-2"/>`; };
+  const lamp = (x, y) => { const [X, Y] = pt(x, y); return `<line x1="${f(X)}" y1="${f(Y)}" x2="${f(X)}" y2="${f(Y - 15)}" stroke="#6F7A82" stroke-width="1.3"/><circle cx="${f(X)}" cy="${f(Y - 16)}" r="2.3" class="m-lamp"/>`; };
+  const ac = (x, y, z) => box(x, y, z, .28, .26, 5, "#C9D0D6");
+  const flag = (x, y, z0, z1, c) => { const [X, Y] = pt(x, y, z1); return line(pt(x, y, z0), [X, Y], 'stroke="#7C7368" stroke-width="1.6"') + `<path d="M${f(X)},${f(Y)} l12,3 l-12,4 z" fill="${c}"/>`; };
+  // Steps growing out of the front-left face.
+  const stairs = (x0, x1, y, n, c = "#E6E0D2") => Array.from({ length: n }, (_, i) => box(x0, y + i * .09, 0, x1 - x0, .09, (n - i) * 2.2, c)).join("");
+  // Tiny vehicles and people, drawn around the origin so they can be moved along a path.
+  const GLASS = "#DCE9F3";
+  const carY = c => box(-.13, -.25, 1.5, .26, .5, 4.5, c) + box(-.11, -.12, 6, .22, .27, 3.4, GLASS);
+  const carX = c => box(-.25, -.13, 1.5, .5, .26, 4.5, c) + box(-.12, -.11, 6, .27, .22, 3.4, GLASS);
+  const person = c => `<ellipse cx="0" cy="0" rx="2.3" ry="1.1" fill="#000" opacity=".16"/><rect x="-1.4" y="-7.2" width="2.8" height="6.4" rx="1.4" fill="${c}"/><circle cx="0" cy="-8.9" r="1.8" fill="#F1C9A5"/>`;
 
-  // Each building: footprint centre (cx, cy), roof height (top) and its drawing.
+  // Each building: footprint centre (cx, cy), roof height (top), ground shadows (sh) and its drawing.
+  const RED = "#E05A5F";
   const SPECS = {
     hospital() {
-      const x = 4.3, y = 8.3, w = 2.4, d = 2.4, h = 66, cx = x + w / 2, cy = y + d / 2;
-      return { cx, cy, top: h, svg: box(x, y, 0, w, d, h, "#F2F4F3") + wins(x, y, 0, w, d, h, 4, 4, 5) +
-        box(x + .9, y + d, 0, .6, .25, 9, "#E05A5F") +
-        quadTop(cx - .55, cy - .16, cx + .55, cy + .16, h, 'fill="#E05A5F"') + quadTop(cx - .16, cy - .55, cx + .16, cy + .55, h, 'fill="#E05A5F"') };
+      const x = 4.3, y = 8.3, d = 2.4, h = 66, mw = 1.55, ax = x + mw, ay = y + .9, yy = y + d, mx = x + mw / 2, my = y + d / 2;
+      const [hx, hy] = pt(ax + .42, ay + .75, 30);
+      return { cx: x + 1.2, cy: y + 1.2, top: h, sh: [[x, y, mw, d, h], [ax, ay, .85, 1.5, 30]], svg:
+        box(x, y, 0, mw, d, h, "#F4F6F5") + wins(x, y, 0, mw, d, h, 3, 4, 6) +
+        fL(mx - .24, mx + .24, yy, 51, 55.5, `fill="${RED}"`) + fL(mx - .075, mx + .075, yy, 46, 60.5, `fill="${RED}"`) +
+        quadTop(mx - .5, my - .15, mx + .5, my + .15, h, `fill="${RED}"`) + quadTop(mx - .15, my - .5, mx + .15, my + .5, h, `fill="${RED}"`) +
+        box(ax, ay, 0, .85, 1.5, 30, "#E6ECEF") + wins(ax, ay, 12, .85, 1.5, 18, 2, 3, 1) +
+        fL(ax + .18, ax + .67, yy, 0, 10.5, 'fill="#7FB4D6"') + box(ax + .08, yy, 10.5, .7, .2, 2.2, RED) +
+        `<ellipse cx="${f(hx)}" cy="${f(hy)}" rx="11" ry="5.5" fill="none" stroke="${RED}" stroke-width="1.6"/>` +
+        box(x + .25, yy + .16, 0, .55, .26, 7, "#FFFFFF") + fL(x + .25, x + .8, yy + .42, 2.6, 4.2, `fill="${RED}"`) };
     },
     police() {
-      const x = 8.3, y = 8.4, w = 2.4, d = 2.2, h = 42, cx = x + w / 2, cy = y + d / 2;
-      return { cx, cy, top: h + 6, svg: box(x, y, 0, w, d, h, "#6F90CC") + wins(x, y, 0, w, d, h, 4, 4, 3) +
+      const x = 8.3, y = 8.4, w = 2.4, d = 2.2, h = 42, cx = x + w / 2, cy = y + d / 2, yy = y + d;
+      return { cx, cy, top: h + 6, sh: [[x, y, w, d, h]], svg: box(x, y, 0, w, d, h, "#6F90CC") + wins(x, y, 13, w, d, h - 20, 4, 4, 2) +
         box(x, y, h - 7, w, d, 3, "#F4F6FA") +
-        box(cx - .32, cy - .09, h, .32, .18, 5, "#E5484D") + `<g class="blink">${box(cx, cy - .09, h, .32, .18, 5, "#3B82F6")}</g>` };
+        fL(cx - .22, cx + .22, yy, 0, 11, 'fill="#2E466F"') + fL(x + .25, x + .75, yy, 3.5, 9.5, 'class="win"') + fL(x + w - .75, x + w - .25, yy, 3.5, 9.5, 'class="win"') +
+        fR(y + .3, y + 1.0, x + w, 0, 11, 'fill="#3F5F9E"') + fR(y + 1.3, y + 1.9, x + w, 3.5, 9.5, 'class="win"') +
+        ac(x + .3, y + .3, h) + line(pt(x + 1.9, y + .5, h), pt(x + 1.9, y + .5, h + 18), 'stroke="#6F7A82" stroke-width="1.4"') +
+        box(cx - .32, cy - .09, h, .32, .18, 5, "#E5484D") + `<g class="blink">${box(cx, cy - .09, h, .32, .18, 5, "#3B82F6")}</g>` +
+        box(x + .35, yy + .14, 1.5, .52, .26, 4.5, "#FFFFFF") + box(x + .47, yy + .16, 6, .26, .22, 3.4, "#3B5FA8") };
     },
     court() {
       const x = .2, y = 4.3, w = 2.6, d = 2.4, cx = x + w / 2, cy = y + d / 2, yy = y + d - .15;
       let cols = "";
-      for (let i = 0; i < 6; i++) {
-        const a = x + .3 + i * .38, b = a + .14;
-        cols += poly([pt(a, yy + .02, 6), pt(b, yy + .02, 6), pt(b, yy + .02, 36), pt(a, yy + .02, 36)], 'fill="#FBF7EE"');
-      }
-      return { cx, cy, top: 56, svg: box(x - .05, y - .05, 0, w + .1, d + .1, 6, "#D9CCB0") + box(x + .15, y + .15, 6, w - .3, d - .3, 30, "#E3D7BE") + cols +
-        box(x + .05, y + .05, 36, w - .1, d - .1, 3, "#EFE6D2") + gable(x + .05, y + .05, 39, w - .1, d - .1, 17, "#D2C3A3") };
+      for (let i = 0; i < 6; i++) { const a = x + .3 + i * .38; cols += fL(a, a + .14, yy + .02, 6, 36, 'fill="#FBF7EE"'); }
+      return { cx, cy, top: 56, sh: [[x, y, w, d, 44]], svg: box(x - .05, y - .05, 0, w + .1, d + .1, 6, "#D9CCB0") + box(x + .15, y + .15, 6, w - .3, d - .3, 30, "#E3D7BE") +
+        fL(cx - .2, cx + .2, yy, 6, 24, 'fill="#6B5642"') + cols + wins(x + .15, y + .15, 10, w - .3, d - .3, 22, 0, 3, 1, .34, .7) +
+        box(x + .05, y + .05, 36, w - .1, d - .1, 3, "#EFE6D2") + gable(x + .05, y + .05, 39, w - .1, d - .1, 17, "#D2C3A3") +
+        stairs(x + .6, x + 2.0, y + d + .05, 3) };
     },
     bank() {
-      const x = 8.3, y = 4.3, w = 2.4, d = 2.4, h = 40, cx = x + w / 2, cy = y + d / 2;
-      return { cx, cy, top: h + 18, svg: box(x - .05, y - .05, 0, w + .1, d + .1, 5, "#B9CCBF") + box(x, y, 5, w, d, h - 5, "#CFE1D6") + wins(x, y, 5, w, d, h - 5, 3, 3, 2, .45, .55) +
-        dome(cx, cy, h, 20, "#E3BD5E") };
+      const x = 8.3, y = 4.3, w = 2.4, d = 2.4, h = 40, cx = x + w / 2, cy = y + d / 2, yy = y + d;
+      let cols = "";
+      for (let i = 0; i < 5; i++) { const a = x + .28 + i * .44; cols += fL(a, a + .13, yy, 5, h - 5, 'fill="#F3F8F4"'); }
+      return { cx, cy, top: h + 18, sh: [[x, y, w, d, h]], svg: box(x - .05, y - .05, 0, w + .1, d + .1, 5, "#B9CCBF") + box(x, y, 5, w, d, h - 5, "#CFE1D6") +
+        fL(cx - .2, cx + .2, yy, 5, 24, 'fill="#5E6F64"') + cols + wins(x, y, 5, w, d, h - 9, 0, 3, 2, .45, .55) +
+        box(x - .04, y - .04, h - 4.5, w + .08, d + .08, 4.5, "#DDEBE2") + dome(cx, cy, h, 20, "#E3BD5E") +
+        flag(cx, cy, h + 17, h + 33, "#2F7D5B") + stairs(x + .7, x + 1.7, yy + .05, 2, "#DDE5DF") };
     },
     office() {
-      const x = 8.6, y = .6, w = 1.8, d = 1.8, h = 150, cx = x + w / 2, cy = y + d / 2;
-      return { cx, cy, top: h + 30, svg: box(x, y, 0, w, d, h, "#8FB6DE") + wins(x, y, 0, w, d, h, 3, 3, 13, .7, .6) +
-        box(x + .2, y + .2, h, w - .4, d - .4, 8, "#7FA6CE") + line(pt(cx, cy, h + 8), pt(cx, cy, h + 30), 'stroke="#7C8C9C" stroke-width="2"') +
-        `<circle cx="${f(pt(cx, cy, h + 30)[0])}" cy="${f(pt(cx, cy, h + 30)[1])}" r="2.5" fill="#FF5D5D" class="blink"/>` };
+      const x = 8.6, y = .6, w = 1.8, d = 1.8, h = 150, cx = x + w / 2, cy = y + d / 2, ph = 16;
+      const [lx, ly] = pt(cx, cy, h + 30);
+      return { cx, cy, top: h + 30, sh: [[x - .25, y - .25, w + .5, d + .5, 60]], svg:
+        box(x - .25, y - .25, 0, w + .5, d + .5, ph, "#7C97B8") + wins(x - .25, y - .25, 3, w + .5, d + .5, ph - 5, 4, 4, 1, .7, .8) +
+        fL(cx - .2, cx + .2, y + d + .25, 0, 10, 'fill="#3E5878"') +
+        box(x, y, ph, w, d, h - ph, "#8FB6DE") + wins(x, y, ph, w, d, h - ph, 3, 3, 12, .72, .62) +
+        box(x, y, h - 3, w, d, 3, "#A9C8E8") + box(x + .2, y + .2, h, w - .4, d - .4, 8, "#7FA6CE") + ac(x + .3, y + .35, h + 8) +
+        line(pt(cx, cy, h + 8), [lx, ly], 'stroke="#7C8C9C" stroke-width="2"') + `<circle cx="${f(lx)}" cy="${f(ly)}" r="2.5" fill="#FF5D5D" class="blink"/>` };
     },
     homes() {
-      const houses = [[.3, 8.3, 1.1, 1.0, "#F3C9A3"], [1.75, 8.4, 1.0, 1.0, "#F4E2A9"], [.45, 9.75, 1.1, 1.0, "#C8DDF1"], [1.85, 9.85, .9, .9, "#E9C4D8"]];
-      const svg = houses.map(([x, y, w, d, c]) => box(x, y, 0, w, d, 16, c) + wins(x, y, 0, w, d, 16, 2, 2, 1, .4, .5) + gable(x - .04, y - .04, 16, w + .08, d + .08, 12, "#C9644E")).join("");
-      return { cx: 1.5, cy: 9.4, top: 30, svg };
+      const houses = [[.3, 8.3, 1.1, 1.0, "#F3C9A3", "#C9644E"], [1.75, 8.4, 1.0, 1.0, "#F4E2A9", "#7E8FA8"], [.45, 9.75, 1.1, 1.0, "#C8DDF1", "#C9644E"], [1.85, 9.85, .9, .9, "#E9C4D8", "#8A6F5C"]];
+      const svg = houses.map(([x, y, w, d, c, r]) => box(x, y, 0, w, d, 16, c) + wins(x, y, 6, w, d, 8, 2, 2, 1, .36, .8) +
+        fL(x + w / 2 - .11, x + w / 2 + .11, y + d, 0, 8.5, 'fill="#7A5A44"') + gable(x - .05, y - .05, 16, w + .1, d + .1, 12, r) +
+        box(x + w * .62, y + d * .2, 21, .16, .16, 9, "#B9A79A") + bush(x + .12, y + d + .16, .7) + bush(x + w - .1, y + d + .16, .6)).join("");
+      return { cx: 1.5, cy: 9.4, top: 30, sh: houses.map(([x, y, w, d]) => [x, y, w, d, 22]), svg };
     },
     cityhall() {
-      const x = 4.2, y = 4.4, w = 2.6, d = 2.2, h = 34, cx = x + w / 2, cy = y + d / 2;
-      const [fx, fy] = pt(cx, cy, h + 46);
-      return { cx, cy, top: h + 52, svg: box(x, y, 0, w, d, h, "#F1E7D6") + wins(x, y, 0, w, d, h, 5, 4, 2) +
-        box(cx - .35, cy - .35, h, .7, .7, 24, "#E7DAC3") + wins(cx - .35, cy - .35, h, .7, .7, 24, 1, 1, 1, .5, .4) +
-        dome(cx, cy, h + 24, 11, "#6FAEA4") + line(pt(cx, cy, h + 32), pt(cx, cy, h + 52), 'stroke="#7C7368" stroke-width="1.6"') +
-        `<path d="M${f(fx)},${f(fy - 6)} l12,3 l-12,4 z" fill="#E05A5F"/>` };
+      const x = 4.2, y = 4.4, w = 2.6, d = 2.2, h = 34, cx = x + w / 2, cy = y + d / 2, yy = y + d;
+      const [kx, ky] = pt(cx, cy + .356, h + 14);
+      let cols = "";
+      for (let i = 0; i < 4; i++) { const a = cx - .42 + i * .26; cols += fL(a, a + .09, yy + .22, 3, 27, 'fill="#FFFBF2"'); }
+      return { cx, cy, top: h + 52, sh: [[x, y, w, d, h + 10]], svg: box(x, y, 0, w, d, h, "#F1E7D6") + wins(x, y, 0, w, d, h, 5, 4, 2) +
+        box(x - .03, y - .03, h - 3, w + .06, d + .06, 3, "#FAF3E6") +
+        box(cx - .5, yy, 0, 1.0, .22, 30, "#EADFCB") + fL(cx - .14, cx + .14, yy + .22, 0, 15, 'fill="#6B5642"') + cols +
+        box(cx - .35, cy - .35, h, .7, .7, 24, "#E7DAC3") +
+        `<ellipse cx="${f(kx)}" cy="${f(ky)}" rx="5" ry="5.4" fill="#FFFDF7" stroke="#7C7368" stroke-width="1"/><path d="M${f(kx)},${f(ky)} v-3.4 M${f(kx)},${f(ky)} l2.4,1.2" stroke="#4B443C" stroke-width="1" fill="none"/>` +
+        dome(cx, cy, h + 24, 11, "#6FAEA4") + flag(cx, cy, h + 32, h + 52, RED) + stairs(cx - .42, cx + .42, yy + .27, 2) };
     },
     school() {
-      const x = 4.3, y = .5, w = 2.4, d = 1.9, h = 28, cx = x + w / 2, cy = y + d / 2;
-      const [fx, fy] = pt(cx, cy, 78);
-      return { cx, cy, top: 80, svg: box(x, y, 0, w, d, h, "#F0C690") + wins(x, y, 0, w, d, h, 5, 4, 2) +
-        box(x + 1.0, y + d, 0, .4, .12, 12, "#8A5A3C") + gable(x - .05, y - .05, h, w + .1, d + .1, 12, "#B5563F") +
+      const x = 4.3, y = .5, w = 2.4, d = 1.9, h = 28, cx = x + w / 2, cy = y + d / 2, yy = y + d;
+      return { cx, cy, top: 80, sh: [[x, y, w, d, h + 8]], svg: box(x, y, 0, w, d, h, "#F0C690") + wins(x, y, 0, w, d, h, 5, 4, 2) +
+        fL(cx - .2, cx + .2, yy, 0, 12, 'fill="#8A5A3C"') + box(cx - .34, yy, 12, .68, .18, 2, "#B5563F") +
+        gable(x - .05, y - .05, h, w + .1, d + .1, 12, "#B5563F") +
         box(cx - .28, cy - .28, h, .56, .56, 28, "#F6D7A8") + wins(cx - .28, cy - .28, h + 12, .56, .56, 14, 1, 1, 1, .5, .6) +
-        gable(cx - .34, cy - .34, h + 28, .68, .68, 9, "#B5563F") +
-        line(pt(cx, cy, h + 36), pt(cx, cy, 80), 'stroke="#7C7368" stroke-width="1.6"') + `<path d="M${f(fx)},${f(fy - 4)} l11,3 l-11,4 z" fill="#3B82F6"/>` };
+        gable(cx - .34, cy - .34, h + 28, .68, .68, 9, "#B5563F") + flag(cx, cy, h + 36, 80, "#3B82F6") +
+        box(x + .15, yy + .2, 1.5, .8, .28, 8, "#F2B632") + fL(x + .2, x + .9, yy + .48, 5.5, 8.4, `fill="${GLASS}"`) };
     },
     media() {
-      const x = .3, y = .5, w = 2.4, d = 2.1, h = 40, cx = x + w / 2, cy = y + d / 2, yy = y + d + .01;
+      const x = .3, y = .5, w = 2.4, d = 2.1, h = 40, cx = x + w / 2, cy = y + d / 2, yy = y + d;
       const mast = (a, b) => line(a, b, 'stroke="#C2493D" stroke-width="1.8" stroke-linecap="round"');
       const mx = cx - .45, my = cy - .2, [tx, ty] = pt(mx, my, h + 72), [dx, dy] = pt(cx + .6, cy + .1, h + 9);
       let lattice = mast(pt(mx - .22, my, h), [tx, ty]) + mast(pt(mx + .22, my, h), [tx, ty]);
       for (const z of [14, 28, 42, 56]) { const k = .22 * (1 - z / 72); lattice += mast(pt(mx - k, my, h + z), pt(mx + k, my, h + z)); }
-      return { cx, cy, top: h + 74, svg: box(x, y, 0, w, d, h, "#C9D2E2") + wins(x, y, 0, w, d, h, 0, 4, 3) +
-        poly([pt(x + .25, yy, 9), pt(x + w - .25, yy, 9), pt(x + w - .25, yy, 33), pt(x + .25, yy, 33)], 'fill="#1F2633"') +
-        poly([pt(x + .35, yy, 12), pt(x + w - .35, yy, 12), pt(x + w - .35, yy, 30), pt(x + .35, yy, 30)], 'class="win"') +
-        poly([pt(x + .35, yy, 12), pt(x + w - .35, yy, 12), pt(x + w - .35, yy, 15), pt(x + .35, yy, 15)], 'fill="#E05A5F"') +
+      return { cx, cy, top: h + 74, sh: [[x, y, w, d, h]], svg: box(x, y, 0, w, d, h, "#C9D2E2") + wins(x, y, 0, w, d, h, 0, 4, 3) +
+        fL(x + .25, x + w - .25, yy, 12, 35, 'fill="#1F2633"') + fL(x + .35, x + w - .35, yy, 15, 32, 'class="win"') + fL(x + .35, x + w - .35, yy, 15, 18, `fill="${RED}"`) +
+        fL(cx - .2, cx + .2, yy, 0, 9.5, 'fill="#3A4252"') + box(x, y, h - 3, w, d, 3, "#DDE4F0") + ac(x + 1.7, y + 1.5, h) +
         lattice + `<circle cx="${f(tx)}" cy="${f(ty)}" r="2.6" fill="#FF5D5D" class="blink"/>` +
         line(pt(cx + .6, cy + .1, h), [dx, dy], 'stroke="#8E9AA5" stroke-width="2.5"') +
         `<ellipse cx="${f(dx)}" cy="${f(dy - 3)}" rx="12" ry="6" transform="rotate(-24 ${f(dx)} ${f(dy - 3)})" fill="#F7FAFC" stroke="#B5C1CC" stroke-width="1.5"/>` };
     },
     lab() {
-      const x = 11.5, y = 4.5, w = 2.1, d = 2.0, h = 30, cx = x + w / 2, cy = y + d / 2;
-      const [vx, vy] = pt(x + 1.75, y + .45, h + 14);
-      return { cx, cy, top: h + 24, svg: box(x, y, 0, w, d, h, "#EEF3F1") + wins(x, y, 0, w, d, h, 4, 4, 2) +
-        box(x, y, h - 7, w, d, 3, "#3FA98C") + dome(cx - .35, cy + .1, h, 15, "#9FD8CF") +
-        box(x + 1.5, y + .2, h, .5, .5, 14, "#C9D4DE") +
-        `<ellipse cx="${f(vx)}" cy="${f(vy)}" rx="8" ry="4" fill="#DDE5EC"/>` +
+      const x = 11.5, y = 4.5, w = 2.1, d = 2.0, h = 30, cx = x + w / 2, cy = y + d / 2, yy = y + d;
+      const tank = (tx, ty) => { const [X, Y] = pt(tx, ty, h); return `<rect x="${f(X - 6)}" y="${f(Y - 15)}" width="12" height="15" fill="#C4CFD8"/><ellipse cx="${f(X)}" cy="${f(Y)}" rx="6" ry="3" fill="#AEBBC6"/><ellipse cx="${f(X)}" cy="${f(Y - 15)}" rx="6" ry="3" fill="#E3EAF0"/>`; };
+      return { cx, cy, top: h + 24, sh: [[x, y, w, d, h]], svg: box(x, y, 0, w, d, h, "#EEF3F1") + wins(x, y, 0, w, d, h - 8, 4, 4, 2) +
+        box(x, y, h - 7, w, d, 3, "#3FA98C") + box(x, y, h - 3, w, d, 3, "#F6FAF8") +
+        fL(cx - .2, cx + .2, yy, 0, 10, 'fill="#4D7F74"') +
+        tank(x + 1.6, y + .45) + tank(x + 1.6, y + .95) + dome(cx - .35, cy + .1, h, 15, "#9FD8CF") +
         line(pt(x + .25, y + 1.7, h), pt(x + .25, y + 1.7, h + 20), 'stroke="#8E9AA5" stroke-width="3"') };
     },
   };
   const KEYS = Object.keys(SPECS);
   const built = Object.fromEntries(KEYS.map(k => [k, SPECS[k]()]));
+  const anchors = Object.fromEntries(KEYS.map(k => [k, pt(built[k].cx, built[k].cy, built[k].top + 10)]));
 
   function svgMarkup() {
-    const N = 11;
-    let ground = `<rect x="-3000" y="-3000" width="6000" height="6000" class="m-water"/>`;
-    for (const [x, y, l] of [[-300, 300, 70], [-420, 120, 50], [380, 330, 60], [470, 120, 40], [-160, 420, 55], [200, 430, 45], [-470, 260, 40], [420, 30, 50]])
+    const N = 11, still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const P = pts => pts.map(([x, y]) => pt(x, y).map(f).join(",")).join(" ");
+    // The island: an uneven coast with a beach, a park on the west side and the biolab peninsula in the east.
+    const coast = P([[-.7, -.6], [3.6, -1.0], [7.6, -.5], [11.6, -.7], [11.9, 3.3], [14.4, 3.5], [14.8, 7.4], [11.9, 7.7], [11.7, 11.6], [7.6, 12.0], [3.8, 11.6], [-.6, 11.8], [-2.2, 9.3], [-2.6, 5.4], [-1.0, 2.6]]);
+    let ground = `<rect x="-3000" y="-3000" width="6000" height="6000" class="m-water"/>` +
+      `<polygon points="${coast}" class="m-shallow"/><polygon points="${coast}" class="m-sand-2" transform="translate(0 7)"/>` +
+      `<polygon points="${coast}" class="m-sand"/><polygon points="${coast}" class="m-grass m-land"/>`;
+    for (const [x, y, l] of [[-330, 330, 70], [-470, 120, 50], [400, 350, 60], [500, 110, 40], [-170, 450, 55], [230, 455, 45], [-500, 250, 40], [430, -10, 50]])
       ground += `<path d="M${x},${y} q${l / 4},-6 ${l / 2},0 t${l / 2},0" class="m-wave"/>`;
-    ground += poly([pt(0, N, 0), pt(N, N, 0), pt(N, N, -16), pt(0, N, -16)], 'class="m-side1"') +
-      poly([pt(N, 0, 0), pt(N, N, 0), pt(N, N, -16), pt(N, 0, -16)], 'class="m-side2"') +
-      poly([pt(0, 0), pt(N, 0), pt(N, N), pt(0, N)], 'class="m-grass"');
-    for (const bx of [0, 4, 8]) for (const by of [0, 4, 8])
-      ground += poly([pt(bx + .1, by + .1), pt(bx + 2.9, by + .1), pt(bx + 2.9, by + 2.9), pt(bx + .1, by + 2.9)], 'class="m-block"');
-    for (const r of [3, 7]) {
-      ground += poly([pt(r, 0), pt(r + 1, 0), pt(r + 1, N), pt(r, N)], 'class="m-road"') + poly([pt(0, r), pt(N, r), pt(N, r + 1), pt(0, r + 1)], 'class="m-road"');
+
+    // Roads first, then each block: a pavement rim around a lawn.
+    for (const r of [3, 7]) ground += poly([pt(r, -.3), pt(r + 1, -.3), pt(r + 1, N + .3), pt(r, N + .3)], 'class="m-road"') + poly([pt(-.3, r), pt(N + .5, r), pt(N + .5, r + 1), pt(-.3, r + 1)], 'class="m-road"');
+    for (const r of [3.5, 7.5]) ground += line(pt(r, -.3), pt(r, N + .3), 'class="m-road-line"') + line(pt(-.3, r), pt(N + .5, r), 'class="m-road-line"');
+    for (const a of [3, 7]) for (const b of [3, 7]) {
+      ground += poly([pt(a, b), pt(a + 1, b), pt(a + 1, b + 1), pt(a, b + 1)], 'class="m-road"'); // clean crossing
+      for (let i = 0; i < 4; i++) {
+        const o = .12 + i * .21;
+        ground += quadTop(a + o, b - .26, a + o + .1, b - .06, 0, 'class="m-zebra"') + quadTop(a + o, b + 1.06, a + o + .1, b + 1.26, 0, 'class="m-zebra"') +
+          quadTop(a - .26, b + o, a - .06, b + o + .1, 0, 'class="m-zebra"') + quadTop(a + 1.06, b + o, a + 1.26, b + o + .1, 0, 'class="m-zebra"');
+      }
     }
-    // The peninsula that holds the biolab.
-    ground += poly([pt(N, 7, 0), pt(14, 7, 0), pt(14, 7, -16), pt(N, 7, -16)], 'class="m-side1"') +
-      poly([pt(14, 4, 0), pt(14, 7, 0), pt(14, 7, -16), pt(14, 4, -16)], 'class="m-side2"') +
-      poly([pt(N, 4), pt(14, 4), pt(14, 7), pt(N, 7)], 'class="m-grass"') +
-      poly([pt(N + .1, 4.1), pt(13.9, 4.1), pt(13.9, 6.9), pt(N + .1, 6.9)], 'class="m-block"');
-    for (const r of [3.5, 7.5]) ground += line(pt(r, 0), pt(r, N), 'class="m-road-line"') + line(pt(0, r), pt(N, r), 'class="m-road-line"');
+    const blocks = [];
+    for (const bx of [0, 4, 8]) for (const by of [0, 4, 8]) blocks.push([bx, by, 3, 3]);
+    blocks.push([11.3, 4.1, 2.9, 2.9]); // biolab
+    for (const [bx, by, bw, bd] of blocks)
+      ground += poly([pt(bx, by), pt(bx + bw, by), pt(bx + bw, by + bd), pt(bx, by + bd)], 'class="m-walk"') +
+        poly([pt(bx + .2, by + .2), pt(bx + bw - .2, by + .2), pt(bx + bw - .2, by + bd - .2), pt(bx + .2, by + bd - .2)], 'class="m-block"');
+    ground += poly([pt(11, 5.2), pt(11.3, 5.2), pt(11.3, 5.8), pt(11, 5.8)], 'class="m-walk"'); // path to the biolab
+
+    // Park with a pond and a fountain, west of the court.
+    const [px, py] = pt(-1.2, 6.4), [qx, qy] = pt(-1.25, 8.6);
+    ground += `<path d="M${P([[0, 5.5]])} L${P([[-1.9, 5.6]])} L${P([[-1.9, 9.1]])} L${P([[0, 9.2]])}" class="m-path"/>` +
+      `<ellipse cx="${f(px)}" cy="${f(py)}" rx="34" ry="17" class="m-sand"/><ellipse cx="${f(px)}" cy="${f(py)}" rx="29" ry="14" class="m-pond"/>` +
+      `<ellipse cx="${f(px - 8)}" cy="${f(py - 3)}" rx="9" ry="3" fill="#fff" opacity=".25"/>` +
+      `<ellipse cx="${f(qx)}" cy="${f(qy)}" rx="15" ry="7.5" class="m-walk"/><ellipse cx="${f(qx)}" cy="${f(qy)}" rx="10" ry="5" class="m-pond"/>` +
+      `<path d="M${f(qx)},${f(qy)} q-5,-14 -9,-3 M${f(qx)},${f(qy)} q5,-14 9,-3 M${f(qx)},${f(qy)} v-13" class="m-jet"/>`;
+    // A small jetty with boats at the south end of the west road.
+    ground += box(3.3, 11.6, -3, .4, 1.5, 4, "#B08B62") +
+      [[2.5, 13.2, "#E05A5F"], [4.6, 13.0, "#3B82F6"], [13.4, 9.2, "#F2B632"]].map(([bx, by, c], i) => { const [X, Y] = pt(bx, by);
+        return `<g class="boat" style="animation-delay:${-i * 1.3}s"><path d="M${f(X - 11)},${f(Y)} l5,5 h12 l5,-5 z" fill="${c}"/><path d="M${f(X)},${f(Y)} v-17 l10,13 z" fill="#FDFDFB"/><line x1="${f(X)}" y1="${f(Y)}" x2="${f(X)}" y2="${f(Y - 18)}" stroke="#6F5B46" stroke-width="1.2"/></g>`; }).join("");
+
+    // Shadows under everything that stands up.
+    let shadows = "";
+    for (const k of KEYS) for (const [x, y, w, d, h] of built[k].sh) {
+      const s = Math.min(1.0, h / 75) * .9;
+      shadows += poly([pt(x + w, y), pt(x + w + s, y + s * .22), pt(x + w + s, y + d + s * .22), pt(x + s, y + d + s * .22), pt(x, y + d), pt(x + w, y + d)], 'class="m-shadow"');
+    }
+
+    // Traffic and pedestrians. They live on the ground layer, so buildings in front cover them.
+    const move = (path, dur, begin, inner) => still ? "" : `<g opacity="0"><animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" path="${path}"/>` +
+      `<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.05;.95;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>${inner}</g>`;
+    const seg = (a, b) => `M${pt(...a).map(f).join(",")} L${pt(...b).map(f).join(",")}`;
+    const CARS = ["#E05A5F", "#3B82F6", "#F2B632", "#5BAE8B", "#FFFFFF", "#8E7CC3", "#444C56"];
+    let traffic = "", ci = 0;
+    for (const r of [3, 7]) for (const [k, t] of [[0, 0], [1, .5]]) {
+      const dur = 22 + (ci % 3) * 4;
+      traffic += move(seg([r + .28, .1], [r + .28, N - .1]), dur, -dur * (t + .13 * r), carY(CARS[ci++ % CARS.length])) +
+        move(seg([r + .72, N - .1], [r + .72, .1]), dur + 3, -dur * (t + .31), carY(CARS[ci++ % CARS.length])) +
+        move(seg([N - .1, r + .28], [.1, r + .28]), dur + 1, -dur * (t + .22), carX(CARS[ci++ % CARS.length])) +
+        move(seg([.1, r + .72], [N - .1, r + .72]), dur + 5, -dur * (t + .07 * r), carX(CARS[ci++ % CARS.length]));
+    }
+    const PEOPLE = ["#E05A5F", "#3B82F6", "#F2B632", "#5BAE8B", "#8E7CC3", "#E58A4E", "#4C5560"];
+    let walkers = "";
+    blocks.slice(0, 9).forEach(([bx, by], i) => {
+      const loop = [[bx + .1, by + .1], [bx + 2.9, by + .1], [bx + 2.9, by + 2.9], [bx + .1, by + 2.9]];
+      for (let j = 0; j < 2; j++) {
+        const pts = j ? loop.slice().reverse() : loop, dur = 70 + ((i * 7 + j * 13) % 30);
+        const path = "M" + pts.map(p => pt(...p).map(f).join(",")).join(" L") + " Z";
+        walkers += move(path, dur, -dur * ((i * .37 + j * .55) % 1), person(PEOPLE[(i * 2 + j) % PEOPLE.length]));
+      }
+    });
+    if (still) walkers = [[2.9, 3.6], [6.1, 7.05], [8.5, 3.05], [5.2, 11.05]].map(([x, y], i) => `<g transform="translate(${pt(x, y).map(f).join(" ")})">${person(PEOPLE[i])}</g>`).join("");
 
     // Draw back to front.
-    const trees = [[2.8, 2.7], [.25, 2.85], [6.85, 2.8], [10.75, 2.75], [2.8, 6.85], [6.9, 6.9], [10.8, 6.85], [6.9, 10.75], [10.75, 10.75], [2.85, 10.8], [3.1, 9.2], [10.7, .4], [7.1, .5], [13.6, 6.6], [11.3, 6.7]];
-    const items = trees.map(([x, y]) => ({ z: x + y, svg: tree(x, y, .9) }));
+    const items = [];
+    for (const [x, y] of [[2.75, 2.7], [.3, 2.75], [6.75, 2.7], [10.7, 2.7], [2.75, 6.75], [6.75, 6.75], [10.7, 6.75], [6.75, 10.7], [10.7, 10.7], [2.75, 10.7], [2.75, 9.3], [10.7, .4], [7.1, .5], [13.6, 6.6], [11.6, 6.7]])
+      items.push({ z: x + y, svg: tree(x, y, .9) });
+    for (const [x, y, s] of [[-1.6, 4.4, 1], [-2.0, 5.0, .85], [-.7, 4.2, .9], [-2.1, 7.6, 1], [-.5, 9.9, .95], [-1.3, 10.3, .8], [-1.9, 9.9, .9], [-.4, 3.0, .8], [11.5, 1.2, .9], [11.4, 9.6, 1], [11.3, 10.6, .8], [5.6, -.5, .85], [1.6, -.5, .8], [9.4, 11.6, .9], [1.4, 11.5, .85]])
+      items.push({ z: x + y, svg: pine(x, y, s) });
+    for (const [x, y] of [[-.9, 7.4], [-1.9, 6.6], [-.5, 5.7], [-.9, 9.3], [12.3, 6.9], [13.9, 4.3]]) items.push({ z: x + y, svg: bush(x, y) });
+    for (const a of [3, 7]) for (const b of [3, 7]) for (const [dx, dy] of [[-.1, -.1], [1.1, 1.1]]) items.push({ z: a + dx + b + dy, svg: lamp(a + dx, b + dy) });
     for (const k of KEYS) {
       const b = built[k], [bx, by] = pt(b.cx, b.cy);
       const glow = `<g class="fx fx-hit"><ellipse class="glow" cx="${f(bx)}" cy="${f(by)}" rx="70" ry="35"/></g>` +
@@ -791,23 +929,19 @@ const City = (() => {
     }
     items.sort((a, b) => a.z - b.z);
 
-    // Badges and smoke sit above everything.
+    // Smoke rises above everything; clouds drift over the whole scene.
     const fx = KEYS.map(k => {
-      const b = built[k], [ax, ay] = pt(b.cx, b.cy, b.top + 22), [sx, sy] = pt(b.cx, b.cy, b.top);
-      const at = (x, y) => `cx="${f(x)}" cy="${f(y)}"`;
-      return `<g class="bfx" data-b="${k}">
-        <g class="fx fx-hit"><g class="smoke"><circle ${at(sx - 6, sy - 4)} r="7"/><circle ${at(sx + 4, sy - 2)} r="6"/><circle ${at(sx - 2, sy)} r="8"/></g>
-          <g class="badge"><circle class="dot" ${at(ax, ay)} r="11"/><path d="M${f(ax - 4)},${f(ay - 4)} l8,8 m0,-8 l-8,8"/></g></g>
-        <g class="fx fx-safe"><g class="badge"><circle class="dot" ${at(ax, ay)} r="11"/><path d="M${f(ax - 5)},${f(ay)} l3.5,3.5 l6.5,-7"/></g></g>
-        <g class="fx fx-wait"><g class="badge"><circle class="halo" ${at(ax, ay)} r="10"/><circle class="dot" ${at(ax, ay)} r="9"/><text x="${f(ax)}" y="${f(ay + .5)}">!</text></g></g>
-        <g class="fx fx-cur"><g class="badge"><circle class="halo" ${at(ax, ay)} r="12"/><circle class="dot" ${at(ax, ay)} r="11"/><text x="${f(ax)}" y="${f(ay + .5)}">?</text></g></g>
-      </g>`;
+      const b = built[k], [sx, sy] = pt(b.cx, b.cy, b.top), at = (x, y) => `cx="${f(x)}" cy="${f(y)}"`;
+      return `<g class="bfx" data-b="${k}"><g class="fx fx-hit"><g class="smoke"><circle ${at(sx - 6, sy - 4)} r="7"/><circle ${at(sx + 4, sy - 2)} r="6"/><circle ${at(sx - 2, sy)} r="8"/></g></g></g>`;
     }).join("");
-    return `${ground}<g class="bldgs">${items.map(i => i.svg).join("")}</g>${fx}`;
+    const cloud = (y, s, dur, begin) => `<g class="m-cloud" transform="translate(0 ${y}) scale(${s})">` + (still ? "" : `<animateTransform attributeName="transform" type="translate" additive="sum" from="-700 0" to="900 0" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>`) +
+      `<ellipse cx="0" cy="0" rx="46" ry="15"/><ellipse cx="-26" cy="6" rx="30" ry="11"/><ellipse cx="30" cy="5" rx="34" ry="12"/><ellipse cx="6" cy="-9" rx="26" ry="12"/></g>`;
+    const clouds = still ? "" : cloud(-40, 1, 140, -30) + cloud(250, .8, 180, -110) + cloud(120, .6, 160, -70);
+    return `${ground}${shadows}<g class="life">${traffic}${walkers}</g><g class="bldgs">${items.map(i => i.svg).join("")}</g>${fx}<g class="sky">${clouds}</g>`;
   }
 
   // Camera
-  const FULL = { cx: 26, cy: 160, w: 860, h: 500 };
+  const FULL = { cx: 20, cy: 168, w: 900, h: 530 };
   function focusOf(k) {
     const b = built[k], [, by] = pt(b.cx, b.cy), [tx, ty] = pt(b.cx, b.cy, b.top + 34);
     return { cx: tx, cy: (by + ty) / 2, w: b.zoom || 300, h: by - ty + 120 };
@@ -918,7 +1052,7 @@ const City = (() => {
   function setTitles(names) {
     for (const el of svg.querySelectorAll(".bldg")) el.querySelector("title").textContent = names[el.dataset.b] || "";
   }
-  return { mount, setStates, setTitles, look, focusOf, FULL, KEYS, zoomAt, isZoomed, wasDrag: () => dragged };
+  return { mount, setStates, setTitles, look, focusOf, FULL, KEYS, zoomAt, isZoomed, wasDrag: () => dragged, anchors, view: () => vb };
 })();
 
 let S; // game state
@@ -964,6 +1098,13 @@ function renderCity(instant) {
     else if (S.phase !== "landing") states[key] = "waiting";
   }
   City.setStates(states);
+  for (const el of document.querySelectorAll(".map-label")) {
+    const st = states[el.dataset.b] || "idle";
+    el.className = "map-label " + st;
+    el.querySelector(".nm").textContent = bName(el.dataset.b);
+    const lbl = st === "safe" ? u.statusSafe : st === "hit" ? u.statusHit : st === "waiting" ? u.statusNew : "";
+    el.setAttribute("aria-label", bName(el.dataset.b) + (lbl ? ": " + lbl : ""));
+  }
   City.setTitles(u.buildings || {});
   $("#city").setAttribute("aria-label", u.mapAria);
   $("#map").classList.toggle("pick", S.phase !== "landing");
@@ -1255,39 +1396,32 @@ function startGloom(canvas) {
 
 // Keep the game state across live republishes of the artifact.
 window.claude?.hot?.snapshot?.(() => S);
-City.mount($("#map"), () => $("#map-tip")?.classList.remove("on"));
+City.mount($("#map"), () => placeLabels());
 $("#z-in").addEventListener("click", () => City.zoomAt(.62));
 $("#z-out").addEventListener("click", () => City.zoomAt(1 / .62));
 $("#z-all").addEventListener("click", () => City.look(City.FULL));
 
-// Building name on hover (or tap).
-(() => {
-  const map = $("#map"), tip = $("#map-tip");
-  let hideT = 0;
-  const show = g => {
-    const u = t(), key = g.dataset.b, r = g.querySelector(".body").getBoundingClientRect(), m = map.getBoundingClientRect();
-    const st = g.classList.contains("safe") ? u.statusSafe : g.classList.contains("hit") ? u.statusHit : "";
-    tip.innerHTML = esc(bName(key)) + (st ? `<small>${esc(st)}</small>` : "");
-    tip.style.left = Math.max(60, Math.min(m.width - 60, r.left + r.width / 2 - m.left)) + "px";
-    tip.style.top = Math.max(34, r.top - m.top) + "px";
-    tip.classList.add("on");
-  };
-  const hide = () => tip.classList.remove("on");
-  map.addEventListener("pointerover", e => { const g = e.target.closest?.(".bldg"); if (g) { clearTimeout(hideT); show(g); } });
-  map.addEventListener("pointerout", e => { if (e.target.closest?.(".bldg")) hide(); });
-  map.addEventListener("click", e => {
-    const g = e.target.closest?.(".bldg");
-    if (!g || City.wasDrag()) return;
-    const i = INCIDENTS.findIndex(x => x.building === g.dataset.b);
-    if (i < 0) return;
-    hide();
-    openBuilding(i); // works from the first screen too: clicking a building starts the game there
-  });
-  map.addEventListener("pointerdown", e => {
-    const g = e.target.closest?.(".bldg");
-    if (g && e.pointerType !== "mouse") { show(g); clearTimeout(hideT); hideT = setTimeout(hide, 1800); }
-  });
-})();
+// Labels follow the buildings as the camera moves.
+function placeLabels() {
+  const map = $("#map"), v = City.view();
+  if (!v) return;
+  const W = map.clientWidth, H = map.clientHeight;
+  map.classList.toggle("compact", W < 620 && v[2] > 560);
+  for (const el of document.querySelectorAll(".map-label")) {
+    const [ax, ay] = City.anchors[el.dataset.b];
+    el.style.transform = `translate(${((ax - v[0]) / v[2] * W).toFixed(1)}px, ${((ay - v[1]) / v[3] * H).toFixed(1)}px) translate(-50%, -100%)`;
+  }
+}
+$("#map-labels").innerHTML = City.KEYS.map(k => `<button class="map-label idle" data-b="${k}"><span class="ic" aria-hidden="true"></span><span class="nm"></span></button>`).join("");
+
+// Click a building or its label to open it. Works from the first screen too.
+$("#map").addEventListener("click", e => {
+  const g = e.target.closest?.(".bldg, .map-label");
+  if (!g || City.wasDrag()) return;
+  const i = INCIDENTS.findIndex(x => x.building === g.dataset.b);
+  if (i >= 0) openBuilding(i);
+});
+
 function start(saved) {
   if (saved && saved.answers && !Array.isArray(saved.answers) && Array.isArray(saved.realFirst) && saved.realFirst.length === INCIDENTS.length) S = saved;
   else newGame();
