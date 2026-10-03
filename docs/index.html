@@ -601,6 +601,11 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, v); } catch {} },
 };
 let lang = (() => {
+  // A link can pick the language: ?lang=ru or #ru (the /ru/ pages redirect to ?lang=ru).
+  try {
+    const asked = (new URLSearchParams(location.search).get("lang") || location.hash.slice(1)).toLowerCase();
+    if (LANG_CODES.includes(asked)) return asked;
+  } catch {}
   const saved = store.get("lang");
   if (saved && LANG_CODES.includes(saved)) return saved;
   for (const pref of navigator.languages || [navigator.language || "en"]) {
@@ -1365,6 +1370,7 @@ menu.addEventListener("change", e => {
   if (e.target.name !== "lang") return;
   lang = e.target.value;
   store.set("lang", lang);
+  try { if (/[?&]lang=/.test(location.search)) history.replaceState(null, "", `?lang=${lang}`); } catch {}
   render(); // the game keeps its place; only the words change
   setMenu(false);
   gear.focus();

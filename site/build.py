@@ -131,6 +131,12 @@ def main():
     DOCS.mkdir(exist_ok=True)
     (DOCS / "index.html").write_text(page)          # served by GitHub Pages (main branch, /docs folder)
     (DOCS / ".nojekyll").write_text("")
+    for code in LANGS:  # short links: /ru/ -> /?lang=ru
+        (DOCS / code).mkdir(exist_ok=True)
+        (DOCS / code / "index.html").write_text(
+            f'<!doctype html><meta charset="utf-8"><title>Incident or Fiction?</title>'
+            f'<meta http-equiv="refresh" content="0; url=../?lang={code}">'
+            f'<script>location.replace("../?lang={code}")</script><a href="../?lang={code}">→</a>\n')
     print(f"Built {len(incidents)} rounds x {len(LANGS)} languages -> {DIST} and {DOCS}")
 
 
