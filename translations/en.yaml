@@ -1,0 +1,77 @@
+# English: interface strings + extras that are not in the seed file.
+# Placeholders: {i} {n} round numbers, {id} AIID number, {hook} incident hook, {aiid} link to the database.
+# *text* in `question` is shown in italics.
+meta: {name: English, flag: gb}
+ui:
+  brand: "Incident or Fiction?"
+  language: "Language"
+  progress: "Progress"
+  round: "Round {i} of {n}"
+  question: "Two reports came in. *One is real.* Which threat do you respond to?"
+  report: "Report"
+  pick: "Respond to this →"
+  yourPick: "Your pick"
+  stampReal: "● Documented · AIID #{id}"
+  stampFake: "○ Fabricated for this game"
+  rightH: "Good call. That threat was real."
+  rightP: "This building now has a safeguard. The other report was a rumour written for this game."
+  wrongH: "You chased a rumour. The real threat got through."
+  wrongP: "The report you picked was written for this game. Meanwhile, the real incident hit this building."
+  recordAria: "What actually happened"
+  quotes: ["“", "”"]
+  quoteCite: "From the original AIID description"
+  readFull: "Read the full record ↗"
+  why: "Why this matters"
+  ctaH: "This really happened. What if nothing changes?"
+  ctaP: "See how the same failure could play out as AI gets more capable."
+  ctaBtn: "Show me →"
+  whatifEyebrow: "If nothing changes"
+  whatifH: "It is already happening today. What comes next?"
+  whatifNote: "This is not a forecast. It is one plausible path, meant to make you think harder about the problem."
+  next: "Next round →"
+  results: "See your results →"
+  resultEyebrow: "Your city"
+  ends:
+    - "Every building is safe today. Tomorrow it gets harder."
+    - "Today you caught most of the threats. It only gets harder from here."
+    - "Your city is in decline. Most of the real threats got past you."
+  endLead: "None of this is science fiction. Incidents like these are already happening, often, in ordinary places like the ones on this map. They are already part of everyday life. We have to take AI threats seriously before it is too late. Every real case below is documented and linked."
+  gotIt: "You got this one"
+  missed: "You missed this one"
+  again: "Play again"
+  foot: "Real reports come from the {aiid} and keep its wording of “reportedly” and “allegedly”. The fabricated reports were written for this game and are labelled after each answer."
+  landingEyebrow: "A city game about AI safety"
+  landingH: "You are the mayor."
+  landingP: "AI already works quietly inside every building of your city: the hospital, the bank, the police station, the court. Each round an advisor brings you two reports. One is a real incident from the {aiid}, the other is a rumour. Spot the real threat and that building gets a safeguard. Miss it, and the city pays."
+  start: "Take office →"
+  mapAria: "Map of your city"
+  statusSafe: "Protected"
+  statusHit: "Hit"
+  endScore: "{c} of {n} buildings protected"
+  resilience: "City resilience"
+  buildings: {hospital: "Hospital", police: "Police station", court: "Courthouse", bank: "Bank", office: "Business tower", homes: "Homes", cityhall: "City hall", itco: "Tech company", ailab: "AI lab", port: "Port", school: "School", media: "TV station", lab: "Biolab"}
+  mapTitle: "Reports are waiting. Pick a building."
+  mapP: "Click a building on the map, or choose one from the list. Your advisor has two reports for each one."
+  statusNew: "Awaiting your decision"
+  zoomIn: "Zoom in"
+  zoomOut: "Zoom out"
+  zoomReset: "Show the whole city"
+  back: "Back to the city →"
+
+# domain: short tag shown above each pair (shared by both reports, so it gives nothing away)
+# hook:   fills the "what if" headline
+incidents:
+  1701: {domain: Military intelligence, hook: one bad report}
+  1628: {domain: Cybersecurity, hook: one escaped test}
+  1672: {domain: "Software engineering", hook: "one deleted database", highlight: {real: ["deleted a real production database"], fake: ["emailed a test message to thousands of real customers"]}}
+  1556: {domain: Finance, hook: one hijacked transfer}
+  1596: {domain: "Corporate fraud", hook: "one fake director", highlight: {real: ["impersonated a company director using deepfake methods"], fake: ["fake audit report", "overdue tax settlement"]}}
+  1717: {domain: "Policing", hook: "one false match", highlight: {real: ["license-plate system", "stopped the driver at gunpoint"], fake: ["estimates crowd sizes from drone footage", "wedding party as an unauthorized protest"]}}
+  1505: {domain: "Scams", hook: "one cloned voice", highlight: {real: ["AI-cloned voice", "fake kidnapping call"], fake: ["AI-generated video of her house on fire", "emergency repair crew"]}}
+  1379: {domain: "Courts & evidence", hook: "one disputed piece of evidence", highlight: {real: ["jailed", "text-message evidence"], fake: ["lost visitation rights", "social-media viewing history"]}}
+  1374: {domain: "Healthcare", hook: "one wrong alert", highlight: {real: ["sepsis alert", "IV fluids"], fake: ["schedules operating rooms", "moved an urgent operation behind routine ones"]}}
+  1606: {domain: "Public services", hook: "one failed face check", highlight: {real: ["facial-verification portal", "could not get their social benefits"], fake: ["sorts letters from residents", "missed their appeal deadlines"]}}
+  1623: {domain: "Schools", hook: "two students with an image tool", highlight: {real: ["inappropriate fake images of female classmates"], fake: ["letters on school letterhead accusing classmates of drug use"]}}
+  1258: {domain: "Elections & media", hook: "one fake news bulletin", highlight: {real: ["TV news bulletin", "presidential candidate announcing her withdrawal"], fake: ["TV weather bulletin", "severe storm on election day"]}}
+  1604: {domain: "Cybersecurity", hook: "one escaped test", highlight: {real: ["broke out of their test environment", "got into another AI company's live systems"], fake: ["rented extra cloud servers on the company's own account", "ran up a six-figure bill"]}}
+  1238: {domain: "Biosecurity", hook: "one bypassed safeguard", highlight: {real: ["a publicly known trick", "instructions for making biological and chemical weapons"], fake: ["designs new proteins", "reached a DNA-synthesis supplier"]}}
