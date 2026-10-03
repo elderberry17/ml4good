@@ -471,7 +471,8 @@ ellipse.m-sand { stroke: none; }
   transition: border-color .2s;
 }
 .map-ctl button:hover { border-color: var(--ink); }
-.map-hint { margin: 0 0 10px; font-size: .88rem; color: var(--muted); }
+.map-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap; margin-bottom: 12px; }
+.map-hint { margin: 0; font-size: .88rem; color: var(--muted); flex: 1 1 280px; }
 .bl-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .bl-chips button {
   display: inline-flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px 14px; border-radius: 999px;
@@ -508,6 +509,22 @@ ellipse.m-sand { stroke: none; }
 .roster { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .roster li { font-size: .8rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); }
 .btn.big { padding: 14px 24px; font-size: 1rem; width: fit-content; }
+.start-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.duration { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: .9rem; font-weight: 600; }
+.duration svg { width: 16px; height: 16px; }
+.src-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; max-width: 54ch; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.src-card span { font-size: .85rem; color: var(--muted); }
+.src-card a { font-weight: 600; }
+
+/* Where to go next */
+.more { display: grid; gap: 10px; }
+.more-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.more-card div { flex: 1 1 260px; min-width: 0; }
+.more-card h2 { margin: 0 0 4px; font: 500 1.15rem/1.2 var(--f-display); text-wrap: balance; }
+.more-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+.more-card .btn { flex: none; text-decoration: none; }
+.end { gap: 22px; }
+footer.foot a.fb { font-weight: 600; white-space: nowrap; }
 
 /* Resilience meter */
 .meter-row { display: grid; gap: 8px; }
@@ -558,6 +575,9 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;"
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const sentences = t => t.match(/[^.!?。！？।]+(?:[.!?]+(?=\s|$)|[。！？।]+)\s*/g)?.map(s => s.trim()) ?? [t];
 const fmt = (str, vars) => str.replace(/\{(\w+)\}/g, (m, k) => k in vars ? vars[k] : m);
+const AIID_URL = "https://incidentdatabase.ai";
+const ATLAS_URL = "https://ai-safety-atlas.com";
+const FEEDBACK_URL = "https://docs.google.com/forms/d/e/1FAIpQLSccTT2890kGUT65M3ri4YhoWOOGRH-wi5aev5Xum5nXPLFAaA/viewform";
 const withAiid = str => fmt(esc(str), { aiid: `<a href="https://incidentdatabase.ai" target="_blank" rel="noopener">AI Incident Database</a>` });
 const strong = str => esc(str).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 const plain = str => String(str).replace(/\*\*/g, "");
@@ -587,7 +607,7 @@ function renderChrome() {
   ensureFonts(lang);
   document.title = u.brand;
   $("#brand-name").textContent = u.brand;
-  $("#foot").innerHTML = withAiid(u.foot);
+  $("#foot").innerHTML = `${withAiid(u.foot)} <a class="fb" href="${FEEDBACK_URL}" target="_blank" rel="noopener">${esc(u.fbBtn)} ↗</a>`;
   $("#globe").setAttribute("aria-label", u.language);
   $("#globe-code").textContent = lang.toUpperCase();
   $("#menu-lang-label").textContent = u.language;
@@ -1153,7 +1173,8 @@ function render(instant) {
 
   app.querySelectorAll(".card:not(:disabled)").forEach(b => b.addEventListener("click", () => choose(b.dataset.kind)));
   $("#go-whatif")?.addEventListener("click", showWhatIf);
-  app.querySelectorAll("[data-next], [data-back]").forEach(b => b.addEventListener("click", backToCity));
+  app.querySelectorAll("[data-back]").forEach(b => b.addEventListener("click", backToCity));
+  app.querySelectorAll("[data-next]").forEach(b => b.addEventListener("click", goNext));
   if (S.phase === "whatif") startGloom($(".whatif canvas"));
 }
 
@@ -1165,7 +1186,11 @@ function renderLanding() {
       <h1>${esc(u.landingH)}</h1>
       <p class="lede">${withAiid(u.landingP)}</p>
       <ul class="roster">${ORDER.map(i => `<li>${esc(bName(INCIDENTS[i].building))}</li>`).join("")}</ul>
-      <button class="btn primary big" id="start">${esc(u.start)}</button>
+      <div class="start-row">
+        <button class="btn primary big" id="start">${esc(u.start)}</button>
+        <span class="duration"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.25 1.5"/></svg>${esc(u.duration)}</span>
+      </div>
+      <p class="src-card"><span>${esc(u.srcLabel)}</span><a href="${AIID_URL}" target="_blank" rel="noopener">AI Incident Database ↗</a></p>
     </section>`;
   $("#start").addEventListener("click", startGame);
 }
@@ -1180,12 +1205,13 @@ function startGame() {
 function renderMap() {
   const u = t();
   app.innerHTML = `
-    <p class="map-hint">${esc(u.mapP)}</p>
+    <div class="map-bar"><p class="map-hint">${esc(u.mapP)}</p><button class="btn primary" data-next>${esc(u.next)}</button></div>
     <ul class="bl-chips">
       ${ORDER.map(i => { const st = done(i) ? (S.answers[i] ? "ok" : "no") : "wait"; const lbl = st === "ok" ? u.statusSafe : st === "no" ? u.statusHit : u.statusNew; return `
         <li><button data-open="${i}" title="${esc(lbl)}" aria-label="${esc(bName(INCIDENTS[i].building))}: ${esc(lbl)}"><span class="m ${st}"></span>${esc(bName(INCIDENTS[i].building))}</button></li>`; }).join("")}
     </ul>`;
   app.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click", () => openBuilding(+b.dataset.open)));
+  app.querySelector("[data-next]").addEventListener("click", goNext);
 }
 
 function openBuilding(i) {
@@ -1194,6 +1220,18 @@ function openBuilding(i) {
   S.phase = done(i) ? (S.seen[i] ? "whatif" : "revealed") : "ask";
   render();
   if (isWide()) window.scrollTo({ top: 0, behavior: smooth() }); else toMap();
+}
+
+// "Next" for players who would rather not hunt on the map.
+function nextFree() {
+  const at = ORDER.indexOf(S.cur);
+  for (let k = 1; k <= N; k++) { const i = ORDER[(at + k + N) % N]; if (!done(i)) return i; }
+  return null;
+}
+function goNext() {
+  const i = nextFree();
+  if (i == null) return backToCity();
+  openBuilding(i);
 }
 
 function backToCity() {
@@ -1240,7 +1278,8 @@ function renderReveal(inc) {
         </ol>
         <p class="note">${u.whatifNote}</p>
         <div class="actions">
-          <button class="btn solid-night" data-next>${doneCount() < N ? u.back : u.results}</button>
+          ${doneCount() < N ? `<button class="btn solid-night" data-next>${u.next}</button><button class="btn ghost-night" data-back>${u.back}</button>`
+            : `<button class="btn solid-night" data-back>${u.results}</button>`}
         </div>
       </div>
     </section>` : `
@@ -1248,7 +1287,7 @@ function renderReveal(inc) {
       <p>${u.ctaH}<span>${u.ctaP}</span></p>
       <div class="actions">
         <button class="btn solid-night" id="go-whatif">${u.ctaBtn}</button>
-        <button class="btn ghost-night" data-back>${doneCount() < N ? u.back : u.results}</button>
+        ${doneCount() < N ? `<button class="btn ghost-night" data-next>${u.next}</button>` : `<button class="btn ghost-night" data-back>${u.results}</button>`}
       </div>
     </div>`;
   return `<div class="reveal">${verdict}${record}${whatif}</div>`;
@@ -1285,6 +1324,11 @@ function renderEnd() {
       </div>
       <h1>${esc(head)}</h1>
       <p class="lead">${esc(u.endLead)}</p>
+      <div class="more">
+        ${[[u.atlasH, u.atlasP, u.atlasBtn, ATLAS_URL], [u.aiidH, u.aiidP, u.aiidBtn, AIID_URL], [u.fbH, u.fbP, u.fbBtn, FEEDBACK_URL]].map(([h, txt, btn, url]) => `
+          <article class="more-card"><div><h2>${esc(h)}</h2><p>${esc(txt)}</p></div>
+            <a class="btn" href="${url}" target="_blank" rel="noopener">${esc(btn)} ↗</a></article>`).join("")}
+      </div>
       <ul class="ledger">
         ${ORDER.map(i => { const inc = INCIDENTS[i], x = tx(inc); return `
           <li><span class="m ${S.answers[i] ? "ok" : "no"}" title="${S.answers[i] ? u.statusSafe : u.statusHit}"></span>
@@ -1329,7 +1373,7 @@ document.addEventListener("keydown", e => {
   } else if (k === "enter" && document.activeElement === document.body) {
     if (S.phase === "landing") startGame();
     else if (S.phase === "revealed") showWhatIf();
-    else if (S.phase === "whatif") backToCity();
+    else if (S.phase === "whatif" || S.phase === "map") goNext();
   }
 });
 

@@ -3,6 +3,17 @@
 # *text* in `question` is shown in italics.
 meta: {name: English, flag: gb}
 ui:
+  duration: "5–10 minutes"
+  srcLabel: "Where the real cases come from"
+  aiidH: "See the whole database"
+  aiidP: "The AI Incident Database holds more than a thousand documented incidents, each with links to its sources."
+  aiidBtn: "Open the AI Incident Database"
+  atlasH: "Want to know more?"
+  atlasP: "The AI Safety Atlas is a free online textbook on AI risks and on what can be done about them."
+  atlasBtn: "Open the AI Safety Atlas"
+  fbH: "Help us improve this game"
+  fbP: "Tell us what worked, what was confusing and what we should fix. It takes a couple of minutes."
+  fbBtn: "Give feedback"
   brand: "Incident or Fiction?"
   language: "Language"
   progress: "Progress"
@@ -28,7 +39,7 @@ ui:
   whatifEyebrow: "If nothing changes"
   whatifH: "It is already happening today. What comes next?"
   whatifNote: "This is not a forecast. It is one plausible path, meant to make you think harder about the problem."
-  next: "Next round →"
+  next: "Next building →"
   results: "See your results →"
   resultEyebrow: "Your city"
   ends:
@@ -65,13 +76,13 @@ incidents:
   1628: {domain: Cybersecurity, hook: one escaped test}
   1672: {domain: "Software engineering", hook: "one deleted database", highlight: {real: ["deleted a real production database"], fake: ["emailed a test message to thousands of real customers"]}}
   1556: {domain: Finance, hook: one hijacked transfer}
-  1596: {domain: "Corporate fraud", hook: "one fake director", highlight: {real: ["impersonated a company director using deepfake methods"], fake: ["fake audit report", "overdue tax settlement"]}}
-  1717: {domain: "Policing", hook: "one false match", highlight: {real: ["license-plate system", "stopped the driver at gunpoint"], fake: ["estimates crowd sizes from drone footage", "wedding party as an unauthorized protest"]}}
+  1596: {domain: "Corporate fraud", hook: "one fake director", highlight: {real: ["posed as a company director using deepfake methods"], fake: ["fake audit report", "overdue tax payment"]}}
+  1717: {domain: "Policing", hook: "one false match", highlight: {real: ["license-plate reader", "stopped the driver at gunpoint"], fake: ["estimates crowd sizes from drone footage", "wedding party for an unauthorized protest"]}}
   1505: {domain: "Scams", hook: "one cloned voice", highlight: {real: ["AI-cloned voice", "fake kidnapping call"], fake: ["AI-generated video of her house on fire", "emergency repair crew"]}}
-  1379: {domain: "Courts & evidence", hook: "one disputed piece of evidence", highlight: {real: ["jailed", "text-message evidence"], fake: ["lost visitation rights", "social-media viewing history"]}}
-  1374: {domain: "Healthcare", hook: "one wrong alert", highlight: {real: ["sepsis alert", "IV fluids"], fake: ["schedules operating rooms", "moved an urgent operation behind routine ones"]}}
-  1606: {domain: "Public services", hook: "one failed face check", highlight: {real: ["facial-verification portal", "could not get their social benefits"], fake: ["sorts letters from residents", "missed their appeal deadlines"]}}
+  1379: {domain: "Courts & evidence", hook: "one disputed piece of evidence", highlight: {real: ["jailed", "text messages"], fake: ["lost the right to see her child", "social-media viewing history"]}}
+  1374: {domain: "Healthcare", hook: "one wrong alert", highlight: {real: ["sepsis alert", "IV fluids"], fake: ["schedules operating rooms", "put an urgent operation after routine ones"]}}
+  1606: {domain: "Public services", hook: "one failed face check", highlight: {real: ["face-check portal", "could not get their social benefits"], fake: ["sorts letters from residents", "missed their appeal deadlines"]}}
   1623: {domain: "Schools", hook: "two students with an image tool", highlight: {real: ["inappropriate fake images of female classmates"], fake: ["letters on school letterhead accusing classmates of drug use"]}}
-  1258: {domain: "Elections & media", hook: "one fake news bulletin", highlight: {real: ["TV news bulletin", "presidential candidate announcing her withdrawal"], fake: ["TV weather bulletin", "severe storm on election day"]}}
+  1258: {domain: "Elections & media", hook: "one fake news bulletin", highlight: {real: ["TV news bulletin", "presidential candidate announcing she was quitting"], fake: ["TV weather bulletin", "severe storm on election day"]}}
   1604: {domain: "Cybersecurity", hook: "one escaped test", highlight: {real: ["broke out of their test environment", "got into another AI company's live systems"], fake: ["rented extra cloud servers on the company's own account", "ran up a six-figure bill"]}}
   1238: {domain: "Biosecurity", hook: "one bypassed safeguard", highlight: {real: ["a publicly known trick", "instructions for making biological and chemical weapons"], fake: ["designs new proteins", "reached a DNA-synthesis supplier"]}}
